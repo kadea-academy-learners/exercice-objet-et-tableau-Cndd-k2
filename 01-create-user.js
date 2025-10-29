@@ -14,7 +14,7 @@ La fonction doit retourner un objet contenant ces trois propriétés :
 
 function createUser( name, age, isConnected) {
     return {
-        name: "candidd",
+        name: "candide",
         age: 24,
         isConnected: false,
     };   
