@@ -12,11 +12,7 @@ function averageNote(notes) {
 
 
 	if (averageNote >= 10) {
-		return {
-			moyenne: averageNote,
-			message: "Réussi",
-			notes: notes,
-		};
+		return "Réussi";
 	} else{
 		return "Échoué";
 	}
