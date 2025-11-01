@@ -7,10 +7,40 @@
 // La fonction doit retourner un tableau contenant les noms des utilisateurs qui sont admin.
 
 function whoIsAdmin(users) {
-
+// 
 	let adminList = [];
+
 	for (let x in users) {
 		if ( users[x].estAdmin ) {
+			adminList.push(users[x].name)
+		}
+	}
+// 
+	return adminList
+}
+
+const myUsers = [
+		{
+			name: "Naruto Uzumaki",
+			age: 45,
+			estAdmin: false,
+		},
+		{
+			name: "Orochimaru",
+			age: 45,
+			estAdmin: false,
+		},
+		{
+			name: "Itachi Uchiha",
+			age: 75,
+			estAdmin: true,
+		},
+		{
+			name: "Kakashi Hatake",
+			age: 35,
+			estAdmin: true,
+		},
+		{
 			name: "Gaara",
 			age: 25,
 			estAdmin: false,
