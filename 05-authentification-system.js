@@ -18,28 +18,30 @@
 //    - Si l'utilisateur est bloqué (`estBloque` à true), retourne un message d'erreur spécifique.
 //    - Sinon, met à jour `estConnecte` à true pour cet utilisateur et retourne l'objet utilisateur connecté.
 
-const baseDeDonnees = [
-  { id: 1, name: "Fayila", email: "fayila@gmail.com", password: "123456", estConnecte: true, estBloque: false },
-  { id: 2, name: "Simeon", email: "Simeon@com", password: "654321", estConnecte: false, estBloque: false },
-  { id: 3, name: "Cherubin", email: "Cherubin@com", password: "112233", estConnecte: false, estBloque: true },
-  { id: 4, name: "Abel", email: "Abel@com", password: "445566", estConnecte: true, estBloque: false },
-  { id: 5, name: "David", email: "David@com", password: "778899", estConnecte: false, estBloque: false }
-];
+const baseDeDonnees = [];
 
-function signUp(name, email, password, confirmPassword) {
-  if (password !== confirmPassword) {
-    return "Erreur : Les mots de passe ne correspondent pas.";
+// Exemple d'utilisateurs initiaux dans la base de données
+baseDeDonnees.push(
+  { id: 1, nom: "Fayila", email: "fayila@gmail.com", password: "123456", estConnecte: true, estBloque: false },
+  { id: 2, nom: "Simeon", email: "Simeon@com", password: "654321", estConnecte: false, estBloque: false },
+  { id: 3, nom: "Cherubin", email: "Cherubin@com", password: "112233", estConnecte: false, estBloque: true },
+  { id: 4, nom: "Abel", email: "Abel@com", password: "445566", estConnecte: true, estBloque: false },
+  { id: 5, nom: "David", email: "David@com", password: "778899", estConnecte: false, estBloque: false }
+);
+
+function signUp(nom, email, password, confirmPassword) {
+  const emailExiste = baseDeDonnees.some(u => u.email === email);
+  if (emailExiste) {
+    return "Erreur: cet email existe déjà";
   }
 
-  for (let i = 0; i < baseDeDonnees.length; i++) {
-    if (baseDeDonnees[i].email === email) {
-      return "Erreur : L'email existe déjà.";
-    }
+  if (password !== confirmPassword) {
+    return "Erreur: les mots de passe ne correspondent pas";
   }
 
   const newUser = {
     id: baseDeDonnees.length + 1,
-    name,
+    nom,
     email,
     password,
     estConnecte: false,
@@ -52,13 +54,21 @@ function signUp(name, email, password, confirmPassword) {
 
 function login(email, password) {
   const user = baseDeDonnees.find(u => u.email === email);
-  if (!user) return "Erreur : Utilisateur introuvable.";
-  if (user.password !== password) return "Erreur : Mot de passe incorrect.";
-  if (user.estBloque) return "Erreur : Utilisateur bloqué.";
+  if (!user) {
+    return "Erreur: utilisateur non trouvé";
+  }
+  if (user.password !== password) {
+    return "Erreur: mot de passe incorrect";
+  }
+  if (user.estBloque) {
+    return "Erreur: utilisateur bloqué";
+  }
 
   user.estConnecte = true;
   return user;
 }
+
+
 
 console.log(baseDeDonnees);
 
