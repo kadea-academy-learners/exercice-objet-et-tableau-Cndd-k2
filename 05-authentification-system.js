@@ -62,7 +62,7 @@ function login(email, password) {
 
 console.log(baseDeDonnees);
 
-console.log(signUp("Fayila", "fayila@gmail.com", "123456", "123456"));
+console.log(signUp["Fayila", "fayila@gmail.com", "123456", "123456"]);
 
 console.log(login("Simeon@com", "654321"));
 
