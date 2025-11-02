@@ -14,70 +14,44 @@
 //     - Moyenne >= 10 : "Passable"
 //     - Moyenne < 10  : "À revoir"
 // Dans le cas où l'élève n'a pas de notes, la moyenne doit être considérée comme 0 et le commentaire "À revoir".
+
 function showStudentBulletin(eleves) {
-	let averageNote = []
+  let averageNote = [];
 
-	for (let i in eleves) {
-		if (eleves[i].notes.length < 1) {
-			averageNote.push({
-				nom : eleves[i].name,
-				moyenne : 0,
-				commentaire : "A revoir"
-			})
-		} else {
-			let sum = 0
-			for(let j = 0; j < eleves[i].notes.length; j++) {
-				sum += eleves[i].notes[j]
-			}
+  for (let i = 0; i < eleves.length; i++) {
+    const notes = eleves[i].notes;
+    let moyenne = 0;
 
-			let average = sum / eleves[i].notes.length
-			let comment = ""
+    if (notes.length > 0) {
+      let sum = 0;
+      for (let j = 0; j < notes.length; j++) sum += notes[j];
+      moyenne = Math.round((sum / notes.length) * 100) / 100; // arrondi 2 décimales
+    }
 
-			if(average >= 16) {
-				comment = "Excellent"
-			} else if (average < 16 && average >= 14) {
-				comment = "Très Bien"
-			} else if (average < 14 && average >= 12) {
-				comment = "Bien"
-			} else if (average < 12 && average >= 10) {
-				comment = "Passable"
-			} else {
-				comment = "A revoir"
-			}
+    let commentaire = "";
+    if (moyenne >= 16) commentaire = "Excellent";
+    else if (moyenne >= 14) commentaire = "Très Bien";
+    else if (moyenne >= 12) commentaire = "Bien";
+    else if (moyenne >= 10) commentaire = "Passable";
+    else commentaire = "À revoir"; // accent et majuscule corrects
 
-			averageNote.push({
-				nom : eleves[i].name,
-				moyenne : average,
-				commentaire : comment
-			})
-		}
-	}
+    averageNote.push({
+      nom: eleves[i].nom, // ✅ utiliser 'nom'
+      moyenne: moyenne,
+      commentaire: commentaire,
+    });
+  }
 
-	return averageNote
+  return averageNote;
 }
 
 const students = [
-	{
-		name: "Judah",
-		notes: [15, 18, 20, 14],
-	},
-	{
-		name: "Randy",
-		notes: [8, 12, 10],
-	},
-	{
-		name: "Francois",
-		notes: [],
-	},
-	{
-		name: "Geoffrey",
-		notes: [13, 14, 15, 16],
-	},
+  { nom: "Judah", notes: [15, 18, 20, 14] },
+  { nom: "Randy", notes: [8, 12, 10] },
+  { nom: "Francois", notes: [4,6,9,0] },
+  { nom: "Geoffrey", notes: [13, 14, 15, 16] },
 ];
+
 console.log(showStudentBulletin(students));
 
-
-
-module.exports = {
-	showStudentBulletin,
-};
+module.exports = { showStudentBulletin };
