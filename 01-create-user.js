@@ -16,7 +16,7 @@ function createUser( nom, age, estConnecte) {
     return {
         nom: nom,
         age: age,
-        estConnecte: estConnecte,
+        estConnecté: estConnecté,
     }
 }
 const user = createUser("John", 30, true);
